@@ -5,7 +5,7 @@ import os
 
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_SECRET_ACCESS_KEY_ID= os.environ.get('AWS_SECRET_ACCESS_KEY_ID')
-REGION_NAME = os.environ.get('REGION_NAME')
+REGION_NAME = 'us-east-2'
  
 table_resource = resource(
    'dynamodb',
