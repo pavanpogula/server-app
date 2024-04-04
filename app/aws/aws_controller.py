@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_SECRET_ACCESS_KEY_ID = os.getenv('AWS_SECRET_ACCESS_KEY_ID')
-REGION_NAME = os.getenv('REGION_NAME')
+REGION_NAME = 'us-east-2'
 
 
 
