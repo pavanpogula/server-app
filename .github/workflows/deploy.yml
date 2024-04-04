@@ -1,0 +1,39 @@
+name: Fast API docker build push
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+    - name: Run Tests
+      run: |
+        pytest -rA
+
+    - name: Build the FastAPI Docker image
+      if: github.ref == 'refs/heads/main'
+      run: docker build -t '${{secrets.DOCKER_USERNAME}}'/server-app-pep:latest . --platform linux/amd64
+      
+    - name: Login to docker
+      if: github.ref == 'refs/heads/main'
+      run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
+
+    - name: Push the docker image
+      if: github.ref == 'refs/heads/main'
+      run: docker push '${{secrets.DOCKER_USERNAME}}'/server-app-pep:latest
