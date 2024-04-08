@@ -11,7 +11,7 @@ from decouple import config
 
 # import data from env files 
 JWT_SECRET = config("JWT_SECRET")
-JWT_ALGORITHM = config("ALGORITHM")
+JWT_ALGORITHM = config("JWT_ALGORITHM")
 
 
 def token_response(token: str):
