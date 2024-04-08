@@ -81,7 +81,7 @@ def user_login(response: Response,user: UserLoginSchema = Body(...)):
 
 
 
-@app.get("/checkUser", tags=["user"])
+@app.get("/checkUser/{email}", tags=["user"])
 def user_login(email: EmailStr):
     data = get_user_by_email(email)
     if data['id'] is None:

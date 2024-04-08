@@ -37,3 +37,15 @@ Application running  [http://localhost:8000](http://localhost:8000)
 ### To Stop Container :
 
 ### `docker stop <Continer-ID>`
+
+
+
+## `Steps to Run Application locaaly directly :`
+
+### To start Container :
+
+### `docker-compose up`
+
+### To Stop Container :
+
+### `docker-compose down`
