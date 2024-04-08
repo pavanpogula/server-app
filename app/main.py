@@ -57,10 +57,16 @@ def add_post(request:Request):
 
 @app.post("/signup", tags=["user"])
 def create_user(response: Response,user: UserRegisterSchema = Body(...)):
-    if(insert_user(user)):
-        return {"message": "201"}
-    else:
-        return {"message": "500"}
+    data = get_user_by_email(user.email)
+    if data['id'] is None:
+        return {"message":'500'}
+    elif data['id'] == 'none':
+        if(insert_user(user)):
+            return {"message": "201"}
+        else:
+            return {"message": "500"}
+    return {"message":'409'}
+    
 
 @app.post("/user/login", tags=["user"])
 def user_login(response: Response,user: UserLoginSchema = Body(...)):
