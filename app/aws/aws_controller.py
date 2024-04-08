@@ -16,11 +16,7 @@ AWS_SECRET_ACCESS_KEY_ID = os.getenv('AWS_SECRET_ACCESS_KEY_ID')
 REGION_NAME = 'us-east-2'
 from boto3.dynamodb.conditions import Key, Attr
 
-print("\n")
-print("AWS_SECRET_ACCESS_KEY ",AWS_SECRET_ACCESS_KEY)
-print("\n")
-print("AWS_SECRET_ACCESS_KEY_ID ",AWS_SECRET_ACCESS_KEY_ID)
-print("\n")
+
 try:
   
     
@@ -220,10 +216,10 @@ def get_multi_axes_by_year(year:int):
         ExpressionAttributeNames={'#yr': 'year'},
             ExpressionAttributeValues={':year': year}
         )
-        print(response)
+       
         if response.get('Items'):
             # If item already exists, return the existing data
-            print(response['Items'][0])
+            
             return response['Items'][0]
         else:
             # If item does not exist, insert the data into the database

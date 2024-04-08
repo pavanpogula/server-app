@@ -8,6 +8,9 @@ WORKDIR /code
 ARG ARGUMENT1=default
 ARG ARGUMENT2=default
 ARG ARGUMENT3=default
+ARG ARGUMENT4=default
+ARG ARGUMENT5=default
+
 # Set environment variables using the build-time arguments
 ENV AWS_SECRET_ACCESS_KEY=$ARGUMENT1 \
     AWS_SECRET_ACCESS_KEY_ID=$ARGUMENT2 \
