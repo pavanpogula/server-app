@@ -39,8 +39,7 @@ def decodeJWT(token: str) -> dict:
     
 
 def validate_password(db_password: str, req_password: str) -> bool:
-    print("db ",db_password)
-    print("re ",req_password)
+
     return db_password == req_password
 
         

@@ -7,3 +7,4 @@ python-dotenv
 pyjwt
 python-decouple
 pydantic[email]
+pycryptodome
