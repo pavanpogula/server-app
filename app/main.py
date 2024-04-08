@@ -21,7 +21,7 @@ app = FastAPI()
 users = []
 
 origins = [
-   
+   "https://pavanpogula.github.io/",
     "http://localhost:3000",
 ]
 
