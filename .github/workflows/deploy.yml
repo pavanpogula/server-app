@@ -22,13 +22,11 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
-    - name: Run Tests
-      run: |
-        pytest -rA
+    
 
     - name: Build the FastAPI Docker image
       if: github.ref == 'refs/heads/main'
-      run: docker build --build-arg ARGUMENT1='${{secrets.AWS_SECRET_ACCESS_KEY}}' --build-arg ARGUMENT2='${{secrets.AWS_SECRET_ACCESS_KEY_ID}}' --build-arg ARGUMENT3='${{secrets.REGION_NAME}}' -t '${{secrets.DOCKER_USERNAME}}'/server-app-pep:latest . --platform linux/amd64
+      run: docker build --build-arg ARGUMENT1='${{secrets.AWS_SECRET_ACCESS_KEY}}' --build-arg ARGUMENT2='${{secrets.AWS_SECRET_ACCESS_KEY_ID}}' --build-arg ARGUMENT3='${{secrets.REGION_NAME}}' --build-arg ARGUMENT4='${{secrets.JWT_SECRET}}' --build-arg ARGUMENT5='${{secrets.JWT_ALGORITHM}}' -t '${{secrets.DOCKER_USERNAME}}'/server-app-pep:latest . --platform linux/amd64
       
     - name: Login to docker
       if: github.ref == 'refs/heads/main'

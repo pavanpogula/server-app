@@ -4,3 +4,6 @@ httpx
 pytest
 boto3
 python-dotenv
+pyjwt
+python-decouple
+pydantic[email]
