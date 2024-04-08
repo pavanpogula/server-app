@@ -41,16 +41,7 @@ except NoCredentialsError:
     print("AWS credentials not found. Please provide valid AWS credentials.")
     # Handle the exception appropriately, e.g., logging, raising a custom exception, etc.
 
-# This function should be defined outside the try-except block to handle exceptions gracefully.
-def get_items_all():
-    try:
-        response = user_table.scan()
-        return response
-    except Exception as e:
-        print("An error occurred while scanning the DynamoDB table:", e)
-        # Handle the exception appropriately, e.g., logging, returning a custom error response, etc.
-        return None
-    
+
     
 def get_user_by_email(email):
     try:

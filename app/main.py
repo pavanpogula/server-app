@@ -3,7 +3,7 @@ sys.path.append(os.path.dirname(sys.path[0]))
 from typing import Union
 from fastapi import FastAPI, Body,Response,Depends,Request
 from fastapi.encoders import jsonable_encoder
-from app.aws.aws_controller import get_items_all,get_user_by_email,insert_user, update_token ,create_table, get_multi_axes_by_year, insert_energy_analysis_state
+from app.aws.aws_controller import get_user_by_email,insert_user, update_token ,create_table, get_multi_axes_by_year, insert_energy_analysis_state
 from app.model import PostSchema, UserLoginSchema, UserRegisterSchema
 from app.auth.auth_handler import signJWT,validate_password,decodeJWT
 from app.auth.auth_bearer import JWTBearer
@@ -53,9 +53,7 @@ def add_post(request:Request):
     }
     
 
-@app.get("/getAllUsers",tags=["users"])
-async def fetch_users():
-    return jsonable_encoder(get_items_all())
+
 
 @app.post("/signup", tags=["user"])
 def create_user(response: Response,user: UserRegisterSchema = Body(...)):
