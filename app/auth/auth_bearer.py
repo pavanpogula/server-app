@@ -19,7 +19,7 @@ class JWTBearer(HTTPBearer):
         else:
             token = auth_cookie.split("Bearer ")[1]
             credentials = {'scheme': "Bearer", 'credentials': token}
-            print('req : ',credentials)
+            
             if credentials:
                 if not credentials['scheme'] == "Bearer":
                     raise HTTPException(status_code=403, detail="Invalid authentication scheme." )
@@ -39,6 +39,6 @@ class JWTBearer(HTTPBearer):
             payload = None
         if payload:
             db_token = get_token_by_id(payload['user_id'])
-            print(db_token)
+            
             isTokenValid = db_token == jwtoken
         return isTokenValid

@@ -44,7 +44,29 @@ def energy_consumption_data ():
         "y": str(round(random.uniform(5, 20), 2))  # realistic range for other sectors consumption
     }
 ]
-
+def energy_production_data ():
+    return[
+    {
+        "name": "Solar Energy",
+        "y": str(round(random.uniform(10, 30), 2))  # realistic range for residential sector consumption
+    },
+    {
+        "name": "Tidal Energy",
+        "y": str(round(random.uniform(10, 25), 2))  # realistic range for commercial sector consumption
+    },
+    {
+        "name": "Bio Mass",
+        "y": str(round(random.uniform(15, 35), 2))  # realistic range for industrial sector consumption
+    },
+    {
+        "name": "Hydro Electric ",
+        "y": str(round(random.uniform(20, 40), 2))  # realistic range for transportation sector consumption
+    },
+    {
+        "name": "Bio Fuel",
+        "y": str(round(random.uniform(5, 20), 2))  # realistic range for other sectors consumption
+    }
+]
 # Function to calculate total consumption and adjust values to ensure total is 100%
 def adjust_values_to_sum_to_100(data):
     total = sum(float(item["y"]) for item in data)
@@ -60,7 +82,7 @@ def adjusted_data(state,year):
         'state':state,
         'year':year,
         'energy_consumption': adjust_values_to_sum_to_100(energy_consumption_data()),
-        'energy_production': adjust_values_to_sum_to_100(energy_consumption_data()),
+        'energy_production': adjust_values_to_sum_to_100(energy_production_data()),
         'carbon_generation': adjust_values_to_sum_to_100(energy_consumption_data()),
     }
 def generate_object_id():

@@ -12,11 +12,7 @@ load_dotenv()
  
 JWT_SECRET = os.getenv("JWT_SECRET")
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM")
-print("\n")
-print("JWT_ALGORITHM ",JWT_ALGORITHM)
-print("\n")
-print("JWT_SECRET",JWT_SECRET)
-print("\n")
+
 def token_response(token: str):
     return {
         "access_token": token
