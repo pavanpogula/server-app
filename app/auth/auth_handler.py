@@ -3,15 +3,15 @@ import sys
 sys.path.append(sys.path[0] + "/app/auth")
 import time
 from typing import Dict
+import os
 
-
-
+from dotenv import load_dotenv
 import jwt
-from decouple import config
 
-# import data from env files 
-JWT_SECRET = config("JWT_SECRET")
-JWT_ALGORITHM = config("JWT_ALGORITHM")
+load_dotenv()
+ 
+JWT_SECRET = os.getenv("JWT_SECRET")
+JWT_ALGORITHM = os.getenv("JWT_ALGORITHM")
 
 
 def token_response(token: str):
