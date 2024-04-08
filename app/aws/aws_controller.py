@@ -16,7 +16,11 @@ AWS_SECRET_ACCESS_KEY_ID = os.getenv('AWS_SECRET_ACCESS_KEY_ID')
 REGION_NAME = 'us-east-2'
 from boto3.dynamodb.conditions import Key, Attr
 
-
+print("\n")
+print("AWS_SECRET_ACCESS_KEY ",AWS_SECRET_ACCESS_KEY)
+print("\n")
+print("AWS_SECRET_ACCESS_KEY_ID ",AWS_SECRET_ACCESS_KEY_ID)
+print("\n")
 try:
   
     
