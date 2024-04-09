@@ -14,11 +14,22 @@ from pydantic import EmailStr
 
 
 
+def create_app() -> CORSMiddleware:
+    """Create app wrapper to overcome middleware issues."""
+    fastapi_app = FastAPI()
+    fastapi_app.include_router(router)
+    return CORSMiddleware(
+        fastapi_app,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 
-app = FastAPI()
-users = []
+app = create_app()
+
 
 origins = [
    "https://pavanpogula.github.io/",
@@ -27,15 +38,6 @@ origins = [
     "http://localhost:3000",
 ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["null", "*"],
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"],
-    expose_headers=["*"]
-
-)
 
 
 
