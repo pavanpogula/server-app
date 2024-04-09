@@ -22,6 +22,8 @@ users = []
 
 origins = [
    "https://pavanpogula.github.io/",
+   "https://pavanpogula.github.io/client-app-pep",
+    "https://pavanpogula.github.io/client-app-pep/",
     "http://localhost:3000",
 ]
 
@@ -29,8 +31,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Set this to your list of allowed origins
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],  # Set the HTTP methods you want to allow
-    allow_headers=["*"],  # Set this to your list of allowed headers
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
 )
 
 
