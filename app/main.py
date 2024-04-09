@@ -7,11 +7,7 @@ from app.aws.aws_controller import get_user_by_email,insert_user, update_token ,
 from app.model import PostSchema, UserLoginSchema, UserRegisterSchema
 from app.auth.auth_handler import signJWT,validate_password,decodeJWT
 from app.auth.auth_bearer import JWTBearer
-from starlette.middleware.cors import CORSMiddleware
-from starlette.middleware import Middleware
-
-
-
+from fastapi.middleware.cors import CORSMiddleware
 import json
 from pydantic import EmailStr
 
@@ -24,19 +20,21 @@ from pydantic import EmailStr
 app = FastAPI()
 users = []
 
-# origins = [
-#    "https://pavanpogula.github.io/",
-#    "https://pavanpogula.github.io/client-app-pep",
-#     "https://pavanpogula.github.io/client-app-pep/",
-#     "http://localhost:3000",
-# ]
+origins = [
+   "https://pavanpogula.github.io/",
+   "https://pavanpogula.github.io/client-app-pep",
+    "http://localhost:3000",
+]
 
-async def add_access_control_header(request: Request, call_next):
-    response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = "*"  # Replace with allowed origin(s)
-    return response
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Set this to your list of allowed origins
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],  # Set the HTTP methods you want to allow
+    allow_headers=["*"],  # Set this to your list of allowed headers
+)
 
-app.middleware("http")(add_access_control_header) 
+
 
 @app.get("/")
 async def read_root():
@@ -123,13 +121,3 @@ async def fetch_dashboard_pie(state:str,year:int):
 @app.get("/dashboard/multiAxesData/{year}",dependencies=[Depends(JWTBearer())],tags=["dashboard"])
 async def insert_dashboard_pie(year:int):
     return get_multi_axes_by_year(year)
-
-
-origins=["*"]
-app = CORSMiddleware (
-    app=app,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
