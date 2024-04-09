@@ -31,9 +31,12 @@ users = []
 #     "http://localhost:3000",
 # ]
 
+async def add_access_control_header(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"  # Replace with allowed origin(s)
+    return response
 
-
-
+app.middleware("http")(add_access_control_header) 
 
 @app.get("/")
 async def read_root():
