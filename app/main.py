@@ -7,36 +7,30 @@ from app.aws.aws_controller import get_user_by_email,insert_user, update_token ,
 from app.model import PostSchema, UserLoginSchema, UserRegisterSchema
 from app.auth.auth_handler import signJWT,validate_password,decodeJWT
 from app.auth.auth_bearer import JWTBearer
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware import Middleware
+
+
+
 import json
 from pydantic import EmailStr
 
 
 
 
-def create_app() -> CORSMiddleware:
-    """Create app wrapper to overcome middleware issues."""
-    fastapi_app = FastAPI()
-    fastapi_app.include_router(router)
-    return CORSMiddleware(
-        fastapi_app,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
 
 
 
-app = create_app()
+app = FastAPI()
+users = []
 
+# origins = [
+#    "https://pavanpogula.github.io/",
+#    "https://pavanpogula.github.io/client-app-pep",
+#     "https://pavanpogula.github.io/client-app-pep/",
+#     "http://localhost:3000",
+# ]
 
-origins = [
-   "https://pavanpogula.github.io/",
-   "https://pavanpogula.github.io/client-app-pep",
-    "https://pavanpogula.github.io/client-app-pep/",
-    "http://localhost:3000",
-]
 
 
 
@@ -126,3 +120,13 @@ async def fetch_dashboard_pie(state:str,year:int):
 @app.get("/dashboard/multiAxesData/{year}",dependencies=[Depends(JWTBearer())],tags=["dashboard"])
 async def insert_dashboard_pie(year:int):
     return get_multi_axes_by_year(year)
+
+
+origins=["*"]
+app = CORSMiddleware (
+    app=app,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
